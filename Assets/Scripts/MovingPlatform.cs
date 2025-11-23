@@ -1,8 +1,4 @@
-using System;
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 public class MovingPlatform : MonoBehaviour
 {
@@ -10,7 +6,10 @@ public class MovingPlatform : MonoBehaviour
 
     private int nextNode;
 
-    // 
+    // Looping: A platform will traverse all movement nodes and then return to the first node completing a looping cycle
+    // Alternating : A platform will traverse all movement nodes and then follow the same path backwards
+    // Reactive: Will only be triggered when the player interacts with the platform, the platform will move to the final node and respawn at the start
+    // ReactiveTwoWay: Will only be triggered when the player interacts with the platform, the platform will move to the final node and wait for another player interaction
     public enum PlatformType { Looping, Alternating, Reactive, ReactiveTwoWay };
 
     public PlatformType platformType;
@@ -40,7 +39,7 @@ public class MovingPlatform : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void FixedUpdate()
+    private void Update()
     {
         if (movementNodes.Length < 2)
         {
