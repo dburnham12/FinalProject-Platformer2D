@@ -38,6 +38,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public bool GetIsGrounded()
+    {
+        return isGrounded;
+    }
+
     private void FixedUpdate()
     {
         // --- Ground check ---
