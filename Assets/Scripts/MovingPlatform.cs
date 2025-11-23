@@ -134,9 +134,7 @@ public class MovingPlatform : MonoBehaviour
             }
             // if the platform is ReactiveTwoWay start moving
             if (platformType == PlatformType.ReactiveTwoWay)
-            {
                 isMoving = true;
-            }
         }
     }
 
@@ -158,9 +156,7 @@ public class MovingPlatform : MonoBehaviour
     {
         // Used to draw lines for visual component, allowing developers to see the path that a platform will move on
         for (int i = 0; i < movementNodes.Length - 1; i++)
-        {
             Gizmos.DrawLine(movementNodes[i].position, movementNodes[i + 1].position);
-        }
 
         if (platformType == PlatformType.Looping)
             Gizmos.DrawLine(movementNodes[movementNodes.Length - 1].position, movementNodes[0].position);
