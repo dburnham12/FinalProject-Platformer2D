@@ -2,55 +2,45 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    public Transform[] movementNodes;
+    [SerializeField] private PlatformType platformType;
+    [SerializeField] private Transform[] movementNodes;
+    [SerializeField] private float platformSpeed = 5f;
+    [SerializeField] private float reactiveLagTimeToRespawn = 5f;
 
-    private int nextNode;
-
-    // Looping: A platform will traverse all movement nodes and then return to the first node completing a looping cycle
-    // Alternating : A platform will traverse all movement nodes and then follow the same path backwards
-    // Reactive: Will only be triggered when the player interacts with the platform, the platform will move to the final node and respawn at the start
-    // ReactiveTwoWay: Will only be triggered when the player interacts with the platform, the platform will move to the final node and wait for another player interaction
-    public enum PlatformType { Looping, Alternating, Reactive, ReactiveTwoWay };
-
-    public PlatformType platformType;
-
-    public float platformSpeed;
-
-    private bool reversing = false;
+    private int targetNode = 1;
+    private bool isMoving;
+    private bool isReversing = false;
 
     // Reactive platform variables
-    private bool reactiveMoving = false;
     private bool isOnPlatform = false;
     private bool isAtSpawn = true;
-    public float reactiveLagTimeToRespawn = 5f;
     private float reactiveLagTimeCounter = 0;
 
-   
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    private void Awake()
     {
-        nextNode = 1;
-        
-        if(movementNodes.Length < 2)
+        if (movementNodes.Length < 2)
         {
             print($"{transform.parent.name} has less than one movement node, must have at least 2");
+            enabled = false;
         }
+
+        GameObject movementNodeOne = new GameObject("MovementNode-1");
+        movementNodeOne.transform.position = transform.position;
+
+        movementNodes[0] = movementNodeOne.transform;
+        
+        isMoving = platformType switch
+        {
+            PlatformType.Looping or PlatformType.Alternating => true,
+            _ => false
+        };
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (movementNodes.Length < 2)
-        {
-            return;
-        }
-
-        if (platformType == PlatformType.Looping
-            || platformType == PlatformType.Alternating
-            || platformType == PlatformType.Reactive && reactiveMoving
-            || platformType == PlatformType.ReactiveTwoWay && reactiveMoving)
-            transform.position = Vector2.MoveTowards(transform.position, movementNodes[nextNode].position, Time.deltaTime * platformSpeed);
+        if (isMoving)
+            transform.position = Vector2.MoveTowards(transform.position, movementNodes[targetNode].position, Time.deltaTime * platformSpeed);
 
         if (platformType == PlatformType.Reactive && !isOnPlatform && !isAtSpawn)
         {
@@ -59,75 +49,49 @@ public class MovingPlatform : MonoBehaviour
             if (reactiveLagTimeCounter >= reactiveLagTimeToRespawn)
             {
                 transform.position = movementNodes[0].position;
-                reactiveMoving = false;
+                isMoving = false;
                 isAtSpawn = true;
-                nextNode = 1;
+                targetNode = 1;
             }
         }
 
-        if (Vector2.Distance(transform.position, movementNodes[nextNode].position) == 0)
+        if (Vector2.Distance(transform.position, movementNodes[targetNode].position) == 0 && isMoving)
         {
-            if (platformType == PlatformType.Looping)
+            switch (platformType, isMoving)
             {
-                if (nextNode < movementNodes.Length - 1)
-                {
-                    nextNode++;
-                }
-                else
-                {
-                    nextNode = 0;
-                }
-            }
-            else if (platformType == PlatformType.Alternating)
-            {
-                if (nextNode == movementNodes.Length - 1)
-                {
-                    reversing = true;
-                }
-                if (nextNode == 0)
-                {
-                    reversing = false;
-                }
-                if (reversing && nextNode > 0)
-                {
-                    nextNode--;
-                }
-                else if (!reversing && nextNode < movementNodes.Length)
-                {
-                    nextNode++;
-                }
-            }
-            else if (platformType == PlatformType.Reactive && reactiveMoving)
-            {
-                if (nextNode < movementNodes.Length - 1)
-                {
-                    nextNode++;
-                }
-                else
-                {
-                    reactiveMoving = false;
-                }
-            }
-            else if (platformType == PlatformType.ReactiveTwoWay && reactiveMoving)
-            {
-                if (nextNode == movementNodes.Length - 1)
-                {
-                    reversing = true;
-                    reactiveMoving = false;
-                }
-                if (nextNode == 0)
-                {
-                    reversing = false;
-                    reactiveMoving = false;
-                }
-                if (reversing && nextNode > 0)
-                {
-                    nextNode--;
-                }
-                else if (!reversing && nextNode < movementNodes.Length)
-                {
-                    nextNode++;
-                }
+                case (PlatformType.Looping, true):
+                    targetNode = targetNode < movementNodes.Length - 1 ? targetNode + 1 : 0;
+                    break;
+                case (PlatformType.Alternating, true):
+                    if (targetNode == movementNodes.Length - 1)
+                        isReversing = true;
+                    
+                    if (targetNode == 0)
+                        isReversing = false;
+                    
+                    targetNode += !isReversing ? 1 : -1;
+                    break;
+                case (PlatformType.Reactive, true):
+                    if (targetNode < movementNodes.Length - 1)
+                        targetNode++;
+                    else
+                        isMoving = false;
+                    break;
+                case (PlatformType.ReactiveTwoWay, true):
+                    if (targetNode == movementNodes.Length - 1)
+                    {
+                        isReversing = true;
+                        isMoving = false;
+                    }
+
+                    if (targetNode == 0)
+                    {
+                        isReversing = false;
+                        isMoving = false;
+                    }
+
+                    targetNode += !isReversing ? 1 : -1;
+                    break;
             }
         }
     }
@@ -139,14 +103,14 @@ public class MovingPlatform : MonoBehaviour
             collision.transform.SetParent(transform);
             if (platformType == PlatformType.Reactive)
             {
-                reactiveMoving = true;
+                isMoving = true;
                 reactiveLagTimeCounter = 0.0f;
                 isOnPlatform = true;
                 isAtSpawn = false;
             }
             if (platformType == PlatformType.ReactiveTwoWay)
             {
-                reactiveMoving = true;
+                isMoving = true;
             }
         }
     }
@@ -156,26 +120,32 @@ public class MovingPlatform : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             collision.transform.SetParent(null);
+
             if (platformType == PlatformType.Reactive)
-            {
                 isOnPlatform = false;
-            }
         }
     }
 
     private void OnDrawGizmos()
     {
-        if(movementNodes.Length > 0)
-        {
-            movementNodes[0].position = transform.position;
-        }
         for (int i = 0; i < movementNodes.Length - 1; i++)
         {
             Gizmos.DrawLine(movementNodes[i].position, movementNodes[i + 1].position);
         }
+
         if (platformType == PlatformType.Looping)
-        {
             Gizmos.DrawLine(movementNodes[movementNodes.Length - 1].position, movementNodes[0].position);
-        }
     }
 }
+
+// Looping: A platform will traverse all movement nodes and then return to the first node completing a looping cycle
+// Alternating : A platform will traverse all movement nodes and then follow the same path backwards
+// Reactive: Will only be triggered when the player interacts with the platform, the platform will move to the final node and respawn at the start
+// ReactiveTwoWay: Will only be triggered when the player interacts with the platform, the platform will move to the final node and wait for another player interaction
+public enum PlatformType
+{
+    Looping,
+    Alternating,
+    Reactive,
+    ReactiveTwoWay
+};
