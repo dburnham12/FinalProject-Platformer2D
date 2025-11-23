@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;  // Reference to the SpriteRenderer component
     private Animator animator;              // Reference to Player's animator
 
+    private float moveInput;
     private bool isGrounded;                // True if player is standing on ground
     private int airJumpCounter = 0;         // Counter for how many times the player has performed an air jump
 
@@ -29,16 +30,25 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // --- Horizontal movement ---
         // Get input from keyboard (A/D or Left/Right arrows).
-        float moveInput = Input.GetAxis("Horizontal");
+        moveInput = Input.GetAxis("Horizontal");
+
+        HorizontalMovement();
+        Jump();
+        SetAnimation();    // Call animation logic based on movement and jump state
+    }
+
+    private void HorizontalMovement()
+    {
         // Apply horizontal speed while keeping the current vertical velocity.
         rigidbody.linearVelocity = new Vector2(moveInput * moveSpeed, rigidbody.linearVelocity.y);
 
         if (moveInput != 0f && isGrounded)
             spriteRenderer.flipX = moveInput < 0f; // makes the player face the way their walking
+    }
 
-        // --- Jump ---
+    private void Jump()
+    {
         if (airJumpCounter > 0 && isGrounded)
             airJumpCounter = 0;
 
@@ -52,35 +62,15 @@ public class PlayerController : MonoBehaviour
 
             airJumpCounter++;
         }
-
-        SetAnimation(moveInput);    // Call animation logic based on movement and jump state
     }
 
     // Decide which animation to play based on movement and grounded state
-    private void SetAnimation(float moveInput)
+    private void SetAnimation()
     {
-        if (isGrounded)                         // On the ground
-        {
-         if (moveInput == 0)                    // Not Moving
-            {
-                animator.Play("Player_Idle");   // Play idle animation
-            }
-         else                                   // Not moving
-            {
-                animator.Play("Player_Run");    // Play run animation
-            }
-        }
-        else                                    // In the air
-        {
-            if (rigidbody.linearVelocityY > 0)  // Going upward
-            {
-                animator.Play("Player_Jump");   // Play jump animation
-            }
-            else                                // Going downward
-            {
-                animator.Play("Player_Fall");   // Play fall animation
-            }
-        }
+        if (isGrounded) // On the ground
+            animator.Play(moveInput == 0 ? "Player_Idle" : "Player_Run"); // Not moving => Play idle animation | Is moving => Play run animation
+        else // In the air
+            animator.Play(rigidbody.linearVelocityY > 0 ? "Player_Jump" : "Player_Fall"); // Going upward => Play jump animation | Going downward => Play fall animation
     }
 
     private void FixedUpdate()
