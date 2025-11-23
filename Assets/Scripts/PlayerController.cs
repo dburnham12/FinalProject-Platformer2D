@@ -13,11 +13,13 @@ public class PlayerController : MonoBehaviour
     // new keyword is used to intentionally override Component.rigidbody, which is deprecated
     private new Rigidbody2D rigidbody;            // Reference to the Rigidbody2D component
     private bool isGrounded;           // True if player is standing on ground
+    private Animator animator;         //Reference to Player's animator
 
     void Start()
     {
         // Grab the Rigidbody2D attached to the Player object once at the start.
         rigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();    //Getting the animator component on the player
     }
 
     void Update()
@@ -35,6 +37,34 @@ public class PlayerController : MonoBehaviour
             // Set vertical velocity to jumpForce (launch upward).
             // Horizontal velocity stays the same.
             rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, jumpForce);
+        }
+        SetAnimation(moveInput);    // Call animation logic based on movement and jump state
+    }
+
+    // Decide which animation to play based on movement and grounded state
+    private void SetAnimation(float moveInput)
+    {
+        if (isGrounded)                         // On the ground
+        {
+         if (moveInput == 0)                    // Not Moving
+            {
+                animator.Play("Player_Idle");   // Play idle animation
+            }
+         else                                   // Not moving
+            {
+                animator.Play("Player_Run");    // Play run animation
+            }
+        }
+        else                                    // In the air
+        {
+            if (rigidbody.linearVelocityY > 0)  // Going upward
+            {
+                animator.Play("Player_Jump");   // Play jump animation
+            }
+            else                                // Going downward
+            {
+                animator.Play("Player_Fall");   // Play fall animation
+            }
         }
     }
 
