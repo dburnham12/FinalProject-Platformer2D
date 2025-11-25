@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 60;
+        
         rigidbody = GetComponent<Rigidbody2D>();    // Grab the Rigidbody2D attached to the Player object once at the start.
         spriteRenderer = GetComponent<SpriteRenderer>(); // Grab the SpriteRenderer attached to the Player GameObject
         animator = GetComponent<Animator>();        // Grab the animator component on the player
