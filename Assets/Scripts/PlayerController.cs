@@ -49,11 +49,8 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (airJumpCounter > 0 && isGrounded && rigidbody.linearVelocityY <= 0)
-        {
-            Debug.Log("here");
+        if (airJumpCounter > 0 && isGrounded)
             airJumpCounter = 0;
-        }
 
         // If player is grounded AND the Jump button (Spacebar by default) is pressed:
         if (Input.GetKeyDown(KeyCode.Space))
@@ -69,10 +66,9 @@ public class PlayerController : MonoBehaviour
                 // Set vertical velocity to jumpForce (launch upward).
                 // Horizontal velocity stays the same.
                 rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, jumpForce);
+                spriteRenderer.flipX = moveInput < 0f; // makes the player face the way they are jumping
                 airJumpCounter++;
             }
-            spriteRenderer.flipX = moveInput < 0f; // makes the player face the way they are jumping
-            Debug.Log(airJumpCounter);
         }
     }
 

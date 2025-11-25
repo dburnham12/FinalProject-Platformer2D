@@ -728,6 +728,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1204259830059039712, guid: ddcdf586fd2a81545a49dafbde61edc2, type: 3}
+      propertyPath: airJumps
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2179636429448631047, guid: ddcdf586fd2a81545a49dafbde61edc2, type: 3}
       propertyPath: m_Name
       value: Player
