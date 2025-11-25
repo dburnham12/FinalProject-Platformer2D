@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 60;
+        
         rigidbody = GetComponent<Rigidbody2D>();    // Grab the Rigidbody2D attached to the Player object once at the start.
         spriteRenderer = GetComponent<SpriteRenderer>(); // Grab the SpriteRenderer attached to the Player GameObject
         animator = GetComponent<Animator>();        // Grab the animator component on the player
@@ -49,30 +51,19 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (airJumpCounter > 0 && isGrounded && rigidbody.linearVelocityY <= 0)
-        {
-            Debug.Log("here");
+        if (airJumpCounter > 0 && isGrounded)
             airJumpCounter = 0;
-        }
 
         // If player is grounded AND the Jump button (Spacebar by default) is pressed:
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && airJumpCounter < airJumps)
         {
-            if(isGrounded)
-            {
-                // Set vertical velocity to jumpForce (launch upward).
-                // Horizontal velocity stays the same.
-                rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, jumpForce);
-            }
-            else if (airJumpCounter < airJumps)
-            {
-                // Set vertical velocity to jumpForce (launch upward).
-                // Horizontal velocity stays the same.
-                rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, jumpForce);
-                airJumpCounter++;
-            }
+            // Set vertical velocity to jumpForce (launch upward).
+            // Horizontal velocity stays the same.
+            rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, jumpForce);
             spriteRenderer.flipX = moveInput < 0f; // makes the player face the way they are jumping
-            Debug.Log(airJumpCounter);
+
+            if(!isGrounded)
+                airJumpCounter++;
         }
     }
 
