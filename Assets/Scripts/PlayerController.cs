@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // [SerializeField] forces fields to appear in the Inspector, so you can tweak them without editing code.
+    [SerializeField] public int coins;                          // For collecting coins
     [SerializeField] private float moveSpeed = 4f;              // How fast the player moves left/right
     [SerializeField] private float jumpForce = 8f;              // How strong the jump is (vertical speed)
     [SerializeField] private int airJumps = 1;                  // How many air jumps the player can perform
