@@ -130,7 +130,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.015}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -140,7 +140,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8, y: 1}
+  m_Size: {x: 0.8, y: 0.95}
   m_EdgeRadius: 0
 --- !u!50 &6890026148647278499
 Rigidbody2D:
@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723f090415ed27d43956963bd1fb667f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  coins: 0
   moveSpeed: 4
   jumpForce: 8
   airJumps: 1
@@ -224,6 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   health: 100
+  healthImage: {fileID: 0}
   damageAmount: 25
 --- !u!1 &6517508367899424400
 GameObject:
