@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // [SerializeField] forces fields to appear in the Inspector, so you can tweak them without editing code.
-    [SerializeField] public int coins;                          // For collecting coins
     [SerializeField] private float moveSpeed = 4f;              // How fast the player moves left/right
     [SerializeField] private float jumpForce = 8f;              // How strong the jump is (vertical speed)
     [SerializeField] private int airJumps = 1;                  // How many air jumps the player can perform
@@ -21,6 +20,18 @@ public class PlayerController : MonoBehaviour
     private float moveInput;
     private bool isGrounded;                // True if player is standing on ground
     private int airJumpCounter = 0;         // Counter for how many times the player has performed an air jump
+    private int coins = 0;
+
+    // Public properties expose fields, and allow logic to be done on getters and setters
+    public int Coins
+    {
+        get { return coins; }
+        set
+        {
+            if (value > coins)
+                coins = value;
+        }
+    }
 
     private void Awake()
     {
@@ -88,8 +99,6 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "BouncePad")
-        {
             rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, jumpForce * 2);
-        }
     }
 }
