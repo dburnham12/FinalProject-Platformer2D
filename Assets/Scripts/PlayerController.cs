@@ -84,4 +84,12 @@ public class PlayerController : MonoBehaviour
         // If this circle overlaps any collider on the "Ground" layer, player is grounded.
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "BouncePad")
+        {
+            rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, jumpForce * 2);
+        }
+    }
 }
