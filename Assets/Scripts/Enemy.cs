@@ -32,8 +32,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        
-
         // Flip direction at boundaries
         if (moveVertically)
         {
