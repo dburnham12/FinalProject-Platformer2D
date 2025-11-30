@@ -8,6 +8,7 @@ public class TextBounce : MonoBehaviour
     private float cycleTimer = 0;
     private float cycleTime = .5f;
     private int direction = 1;
+
     void Start()
     {
         initialPos = gameObject.transform.position;
