@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
         // Flip direction at boundaries
         if (moveVertically)
         {
-            // Move horizontally only
+            // Move vertically only
             rigidbody.linearVelocity = new Vector2(0f, direction * moveSpeed);
 
             if (direction > 0 && transform.position.y >= topBoundary)
