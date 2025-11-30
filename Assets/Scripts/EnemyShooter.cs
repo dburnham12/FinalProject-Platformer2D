@@ -21,7 +21,11 @@ public class EnemyShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Vector2.Distance(player.transform.position, transform.position) < playerRange)
+        bool distanceCheck = Vector2.Distance(player.transform.position, transform.position) < playerRange;
+        bool positionCheck = (shootPos.transform.position.x < transform.position.x && player.transform.position.x < transform.position.x) ||
+            (shootPos.transform.position.x > transform.position.x && player.transform.position.x > transform.position.x);
+
+        if(distanceCheck && positionCheck)
         {
             if(shootTimer < shootTime)
             {

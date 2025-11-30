@@ -42,10 +42,10 @@ GameObject:
   - component: {fileID: 8403722334360861858}
   - component: {fileID: 5243827554514443747}
   - component: {fileID: 5642458175316824535}
-  - component: {fileID: 6479159920148763973}
   - component: {fileID: 3842922267717090981}
   - component: {fileID: 1665331325034683871}
   - component: {fileID: 6713088223553843517}
+  - component: {fileID: 6479159920148763973}
   m_Layer: 0
   m_Name: EnemyShootingLeft
   m_TagString: Damage
@@ -149,20 +149,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6479159920148763973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4685824014922313556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bf0c2f7da11aab46b57b6db012b67f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyShooter
-  shootPos: {fileID: 734140284261887758}
-  damagePellet: {fileID: 5071839552382243842, guid: a6114a2f3c75bcf4486c3720b47d1480, type: 3}
 --- !u!50 &3842922267717090981
 Rigidbody2D:
   serializedVersion: 5
@@ -250,3 +236,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TakingDamage
   knockbackDuration: 0.25
   knockbackForce: 5
+--- !u!114 &6479159920148763973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4685824014922313556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bf0c2f7da11aab46b57b6db012b67f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyShooter
+  shootPos: {fileID: 734140284261887758}
+  damagePellet: {fileID: 5071839552382243842, guid: a6114a2f3c75bcf4486c3720b47d1480, type: 3}
