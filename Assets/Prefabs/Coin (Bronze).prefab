@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7666108984142744023}
   m_Layer: 0
   m_Name: Coin (Bronze)
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f23c26a2b9c2148ba2af9ebb81525c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
+  coinsToGive: 1
 --- !u!61 &7666108984142744023
 BoxCollider2D:
   m_ObjectHideFlags: 0

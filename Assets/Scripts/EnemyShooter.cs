@@ -16,6 +16,7 @@ public class EnemyShooter : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         animator = GetComponent<Animator>();
+        shootTimer = shootTime;
     }
 
     // Update is called once per frame
@@ -37,6 +38,10 @@ public class EnemyShooter : MonoBehaviour
                 Instantiate(damagePellet, shootPos.transform.position, Quaternion.identity);
                 shootTimer = 0f;
             }
+        }
+        else
+        {
+            shootTimer = shootTime;
         }
     }
 }
