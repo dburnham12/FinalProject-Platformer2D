@@ -14,11 +14,21 @@ public class PlayerHealth : MonoBehaviour
     // Reference to the Player's SpriteRenderer (used for flashing red)
     private SpriteRenderer spriteRenderer;
 
+    public float deathDepth = -5f;
+
     private void Start()
     {
         // Get the SpriteRenderer component attached to the Player
         spriteRenderer = GetComponent<SpriteRenderer>();
         UpdateHealthBar();      //Update Health Bar at start
+    }
+
+    private void Update()
+    {
+        if(transform.position.y < deathDepth)
+        {
+            Die();
+        }
     }
 
     // Method to reduce health when damage is taken
