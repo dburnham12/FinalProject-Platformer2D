@@ -1430,7 +1430,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c7dea5c379a0047a4c613aa4e8bbfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VictoryMenu
-  container: {fileID: 0}
 --- !u!1 &943296842
 GameObject:
   m_ObjectHideFlags: 0
@@ -5350,8 +5349,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 828921731}
-        m_TargetAssemblyTypeName: VictoryMenu, Assembly-CSharp
+      - m_Target: {fileID: 145744439}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: MainMenuButton
         m_Mode: 1
         m_Arguments:
