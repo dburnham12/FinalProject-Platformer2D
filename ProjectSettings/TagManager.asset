@@ -7,6 +7,7 @@ TagManager:
   - Damage
   - CoinText
   - BouncePad
+  - Coin
   layers:
   - Default
   - TransparentFX
