@@ -74,6 +74,8 @@ public class PlayerController : MonoBehaviour
             rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, jumpForce);
             spriteRenderer.flipX = moveInput < 0f; // makes the player face the way they are jumping
 
+            SoundManager.Instance.PlaySFX("JUMP", 1f);
+
             if(!isGrounded)
                 airJumpCounter++;
         }
@@ -99,6 +101,9 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "BouncePad")
+        {
+            SoundManager.Instance.PlaySFX("BOING", 1f);
             rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, jumpForce * 2);
+        }
     }
 }

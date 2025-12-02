@@ -8,6 +8,7 @@ public class VictoryFlag : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            SoundManager.Instance.PlaySFX("VICTORY", 1f);
             container.SetActive(true);
             Time.timeScale = 0.0f;
         }
