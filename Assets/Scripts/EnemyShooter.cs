@@ -35,6 +35,7 @@ public class EnemyShooter : MonoBehaviour
             else
             {
                 animator.Play("Enemy_Shoot", -1, 0f);
+                SoundManager.Instance.PlaySFX("SHOOT", .2f);
                 Instantiate(damagePellet, shootPos.transform.position, Quaternion.identity);
                 shootTimer = 0f;
             }

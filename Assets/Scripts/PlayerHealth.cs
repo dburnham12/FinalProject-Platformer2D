@@ -49,6 +49,7 @@ public class PlayerHealth : MonoBehaviour
     {
         health -= damageAmount; // subtract damage amount
         UpdateHealthBar();      //Update Health Bar each frame
+        SoundManager.Instance.PlaySFX("HIT", 1f); // Play the hit sound
         StartCoroutine(BlinkRed()); // briefly flash red
 
         // If health reaches zero or below, call Die()
