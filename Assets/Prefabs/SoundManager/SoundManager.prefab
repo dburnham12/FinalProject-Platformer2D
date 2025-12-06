@@ -155,3 +155,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 3a19c4de72cd5404f8b004bc331a47fe, type: 3}
   - key: SHOOT
     clip: {fileID: 8300000, guid: 4be4addafc3477341b829231caee1b18, type: 3}
+  - key: DOOR
+    clip: {fileID: 8300000, guid: c17429f65c7993b4b95656f74cf0b2ca, type: 3}
+  - key: KEY
+    clip: {fileID: 8300000, guid: a1e45713934326540b7dd140ec6e9212, type: 3}
