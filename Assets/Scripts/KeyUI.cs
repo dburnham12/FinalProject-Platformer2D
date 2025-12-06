@@ -16,12 +16,6 @@ public class KeyUI : MonoBehaviour
         imageList = new List<Image>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void AddKey(Color color)
     {
         Image keyObject = Instantiate(keyImage, new Vector3(transform.position.x, transform.position.y + uiPosition, transform.position.z), Quaternion.identity);
