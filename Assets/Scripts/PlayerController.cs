@@ -4,7 +4,10 @@ public class PlayerController : MonoBehaviour
 {
     // [SerializeField] forces fields to appear in the Inspector, so you can tweak them without editing code.
     [SerializeField] private float moveSpeed = 4f;              // How fast the player moves left/right
-    [SerializeField] private float jumpForce = 8f;              // How strong the jump is (vertical speed)
+    [SerializeField] private float jumpForce = 7.5f;              // How strong the jump is (vertical speed)
+    [SerializeField] private float jumpBufferTime = 0.15f;
+    [SerializeField] private float jumpContinuesForce = 0.3f;
+    [SerializeField] private float maxJumpSpeed = 12f;
     [SerializeField] private int airJumps = 1;                  // How many air jumps the player can perform
     [SerializeField] private Transform groundCheck;             // Empty child object placed at the player's feet
     [SerializeField] private float groundCheckRadius = 0.2f;    // Size of the circle used to detect ground
@@ -21,6 +24,11 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;                // True if player is standing on ground
     private int airJumpCounter = 0;         // Counter for how many times the player has performed an air jump
     private int coins = 0;
+
+    private float coyoteTime = 0.2f;
+    private float coyoteTimeCounter;
+
+    private float jumpBufferCounter;
 
     // Public properties expose fields, and allow logic to be done on getters and setters
     public int Coins
@@ -44,6 +52,30 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        //CoyoteTime
+        if (isGrounded)
+        {
+            coyoteTimeCounter = coyoteTime;
+            airJumpCounter = 0;      
+        }
+        else 
+            coyoteTimeCounter -= Time.deltaTime;
+
+        //Jump buffer
+        if (Input.GetKeyDown(KeyCode.Space))
+            jumpBufferCounter = jumpBufferTime;
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+            if (jumpBufferCounter < 0f) jumpBufferCounter = 0f;
+        }
+
+        //dynamic gravity scaling
+        if (rigidbody.linearVelocityY < 0)
+            rigidbody.gravityScale = 3f;
+        else 
+            rigidbody.gravityScale = 2f;
+        
         // Get input from keyboard (A/D or Left/Right arrows).
         moveInput = Input.GetAxis("Horizontal");
 
@@ -63,11 +95,11 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (airJumpCounter > 0 && isGrounded)
-            airJumpCounter = 0;
+        bool canCoyoteJump = coyoteTimeCounter > 0f;
+        bool canAirJump = airJumpCounter < airJumps;
 
         // If player is grounded AND the Jump button (Spacebar by default) is pressed:
-        if (Input.GetKeyDown(KeyCode.Space) && airJumpCounter < airJumps)
+        if (jumpBufferCounter > 0f && (canAirJump || canCoyoteJump))
         {
             // Set vertical velocity to jumpForce (launch upward).
             // Horizontal velocity stays the same.
@@ -76,8 +108,16 @@ public class PlayerController : MonoBehaviour
 
             SoundManager.Instance.PlaySFX("JUMP", 1f);
 
-            if(!isGrounded)
+            if(canCoyoteJump)
+            {
+                coyoteTimeCounter = 0f;
+            } 
+            else
+            {
                 airJumpCounter++;
+            } 
+
+            jumpBufferCounter = 0f;
         }
     }
 
@@ -96,6 +136,19 @@ public class PlayerController : MonoBehaviour
         // Create an invisible circle at the GroundCheck position.
         // If this circle overlaps any collider on the "Ground" layer, player is grounded.
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        //Variable Jump
+        if (Input.GetKey(KeyCode.Space) && rigidbody.linearVelocity.y > 0)
+        {
+            // Apply upward impulse 
+            rigidbody.AddForce(Vector2.up * jumpContinuesForce, ForceMode2D.Impulse);
+
+            //clamp jump
+            if (rigidbody.linearVelocity.y > maxJumpSpeed)
+            {
+                rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, maxJumpSpeed);
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
