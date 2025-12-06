@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7775408308797855038}
   - component: {fileID: 6212846542600789814}
-  - component: {fileID: 4209973862522575674}
+  - component: {fileID: 9147919839830459871}
   m_Layer: 0
   m_Name: BouncePad
   m_TagString: BouncePad
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6152771587462501736, guid: be2c3ab31471a374fbe807afc2e1f4e8, type: 3}
+  m_Sprite: {fileID: 7270871803113818274, guid: cb4d67846abb2114783b179d704e9f68, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -91,8 +91,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4209973862522575674
-BoxCollider2D:
+--- !u!60 &9147919839830459871
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -129,11 +129,18 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.625}
+    oldSize: {x: 1, y: 0.5625}
     newSize: {x: 1, y: 0.625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 0.625}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.23973322, y: 0.21708226}
+      - {x: -0.5, y: -0.08591962}
+      - {x: -0.5, y: -0.28125}
+      - {x: 0.5, y: -0.28125}
+      - {x: 0.5, y: -0.08848655}
+      - {x: 0.24743319, y: 0.21708226}
+  m_UseDelaunayMesh: 0
