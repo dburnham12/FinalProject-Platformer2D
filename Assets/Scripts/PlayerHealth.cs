@@ -18,6 +18,8 @@ public class PlayerHealth : MonoBehaviour
     // Reference to the Player's SpriteRenderer (used for flashing red)
     private SpriteRenderer spriteRenderer;
 
+    [SerializeField] private int healAmount = 25;
+
     private void Awake()
     {
         // Get the SpriteRenderer component attached to the Player
@@ -55,6 +57,23 @@ public class PlayerHealth : MonoBehaviour
         // If health reaches zero or below, call Die()
         if (health <= 0)
             Die();
+    }
+
+    //Method to heal player when healthUp is collected
+    public bool healPlayer()
+    {   
+        bool healed = false;
+        if (health < 100)
+        {
+            health += healAmount;
+            if (health > 100)
+                health = 100;
+                
+            healed = true;
+            UpdateHealthBar();
+        }
+        
+        return healed;
     }
 
     // Coroutine to flash the Player red for 0.1 seconds
