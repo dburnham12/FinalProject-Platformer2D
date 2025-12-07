@@ -64,11 +64,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        // --- Ground check ---
+        // Create an invisible circle at the GroundCheck position.
+        // If this circle overlaps any collider on the "Ground" layer, player is grounded.
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
         //Landing detection
-        if (!wasGrounded && isGrounded)
+        if (!wasGrounded && isGrounded) //wasGrounded makes sure of landing condition
         {
             coyoteTimeCounter = coyoteTime; //reset coyote timer while grounded 
-            airJumpCounter = 0; //reset airJump counter, workaround to fix triple jump bug while using FixedUpdate method
+            airJumpCounter = 0; //reset airJump counter 
         }
         
         //Coyote Timer (airborne)
@@ -79,7 +84,6 @@ public class PlayerController : MonoBehaviour
                 coyoteTimeCounter = 0f;
         }
 
-        wasGrounded = isGrounded;
 
         //Jump buffer
         if (Input.GetKeyDown(KeyCode.Space))
@@ -102,6 +106,8 @@ public class PlayerController : MonoBehaviour
         HorizontalMovement();
         Jump();
         SetAnimation();    // Call animation logic based on movement and jump state
+        
+        wasGrounded = isGrounded;   //set last frame to grounded
     }
 
     private void HorizontalMovement()
@@ -136,13 +142,9 @@ public class PlayerController : MonoBehaviour
             SoundManager.Instance.PlaySFX("JUMP", 1f);
 
             if(canCoyoteJump)
-            {
                 coyoteTimeCounter = 0f;
-            } 
             else
-            {
                 airJumpCounter++;
-            } 
 
             jumpBufferCounter = 0f;
         }
@@ -166,11 +168,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // --- Ground check ---
-        // Create an invisible circle at the GroundCheck position.
-        // If this circle overlaps any collider on the "Ground" layer, player is grounded.
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
         //Variable Jump
         if (Input.GetKey(KeyCode.Space) && rigidbody.linearVelocity.y > 0)
         {
