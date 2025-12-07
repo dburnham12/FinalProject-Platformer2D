@@ -161,3 +161,5 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: a1e45713934326540b7dd140ec6e9212, type: 3}
   - key: ENEMYDEATH
     clip: {fileID: 8300000, guid: 05cbc4f3e17ca5b4d91ae21f6e29e54f, type: 3}
+  - key: EAT
+    clip: {fileID: 8300000, guid: 32fd48996ba820242881f916b0eece87, type: 3}

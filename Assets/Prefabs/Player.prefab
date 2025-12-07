@@ -84,7 +84,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2311659948842064771, guid: 6864c07881531da4f9c566c743a61062, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -181,15 +181,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723f090415ed27d43956963bd1fb667f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  coins: 0
   moveSpeed: 4
   jumpForce: 8
+  jumpBufferTime: 0.2
+  jumpContinuesForce: 0.15
+  maxJumpSpeed: 10
   airJumps: 1
+  jumpBoostDuration: 5
+  speedBoostDuration: 5
   groundCheck: {fileID: 4906320599675087504}
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  jumpIndicator: {fileID: 0}
+  speedIndicator: {fileID: 0}
 --- !u!95 &1886274991133445582
 Animator:
   serializedVersion: 7
@@ -227,6 +233,8 @@ MonoBehaviour:
   health: 100
   healthImage: {fileID: 0}
   damageAmount: 25
+  deathDepth: -5
+  healAmount: 25
 --- !u!1 &6517508367899424400
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,8 +17,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.2f;    // Size of the circle used to detect ground
     [SerializeField] private LayerMask groundLayer;             // Which layer counts as "ground" (set in Inspector)
 
-    
-
+    [SerializeField] private Image jumpIndicator;
+    [SerializeField] private Image speedIndicator;
+   
     // Private fields are used internally by the script.
     // Components
     // new keyword is used to intentionally override Component.rigidbody, which is deprecated
@@ -60,6 +62,8 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>(); // Grab the SpriteRenderer attached to the Player GameObject
         animator = GetComponent<Animator>();        // Grab the animator component on the player
         playerHealth = GetComponent<PlayerHealth>();    //Grab the health component
+        speedIndicator.color = Color.grey;
+        jumpIndicator.color = Color.grey;
     }
 
     private void Update()
@@ -122,7 +126,9 @@ public class PlayerController : MonoBehaviour
     private IEnumerator SpeedBoost(float duration)
     {
         moveSpeed = 8f;
+        speedIndicator.color = Color.white;
         yield return new WaitForSeconds(duration);
+        speedIndicator.color = Color.grey;
         moveSpeed = 4f;
     }
 
@@ -153,7 +159,9 @@ public class PlayerController : MonoBehaviour
     private IEnumerator TripleJump(float duration)
     {
         airJumps = 2;
+        jumpIndicator.color = Color.white;
         yield return new WaitForSeconds(duration);
+        jumpIndicator.color = Color.grey;
         airJumps = 1;
     }
 
