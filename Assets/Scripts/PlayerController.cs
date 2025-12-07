@@ -1,17 +1,22 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     // [SerializeField] forces fields to appear in the Inspector, so you can tweak them without editing code.
     [SerializeField] private float moveSpeed = 4f;              // How fast the player moves left/right
-    [SerializeField] private float jumpForce = 7.5f;              // How strong the jump is (vertical speed)
-    [SerializeField] private float jumpBufferTime = 0.15f;
-    [SerializeField] private float jumpContinuesForce = 0.3f;
-    [SerializeField] private float maxJumpSpeed = 12f;
+    [SerializeField] private float jumpForce = 8f;              // How strong the jump is (vertical speed)
+    [SerializeField] private float jumpBufferTime = 0.2f;       // how long to give forgiveness for jumping too early
+    [SerializeField] private float jumpContinuesForce = 0.2f;   // determines the impulse strength for variableJump
+    [SerializeField] private float maxJumpSpeed = 10f;          // clamp for variableJump
     [SerializeField] private int airJumps = 1;                  // How many air jumps the player can perform
+    [SerializeField] private float jumpBoostDuration = 10f;     // duration of how long triple jump boost lasts for
+    [SerializeField] private float speedBoostDuration = 10f;
     [SerializeField] private Transform groundCheck;             // Empty child object placed at the player's feet
     [SerializeField] private float groundCheckRadius = 0.2f;    // Size of the circle used to detect ground
     [SerializeField] private LayerMask groundLayer;             // Which layer counts as "ground" (set in Inspector)
+
+    
 
     // Private fields are used internally by the script.
     // Components
@@ -19,16 +24,22 @@ public class PlayerController : MonoBehaviour
     private new Rigidbody2D rigidbody;      // Reference to the Rigidbody2D component
     private SpriteRenderer spriteRenderer;  // Reference to the SpriteRenderer component
     private Animator animator;              // Reference to Player's animator
+    private PlayerHealth playerHealth;      // Reference to Player's health
 
     private float moveInput;
     private bool isGrounded;                // True if player is standing on ground
+    private bool wasGrounded;               // added to fix triple jump bug
     private int airJumpCounter = 0;         // Counter for how many times the player has performed an air jump
     private int coins = 0;
 
+    //Jump additions
     private float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
-
     private float jumpBufferCounter;
+    private Coroutine jumpBoostRoutine;
+
+    //Speed additions
+    private Coroutine speedBoostRoutine;
 
     // Public properties expose fields, and allow logic to be done on getters and setters
     public int Coins
@@ -48,18 +59,27 @@ public class PlayerController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();    // Grab the Rigidbody2D attached to the Player object once at the start.
         spriteRenderer = GetComponent<SpriteRenderer>(); // Grab the SpriteRenderer attached to the Player GameObject
         animator = GetComponent<Animator>();        // Grab the animator component on the player
+        playerHealth = GetComponent<PlayerHealth>();    //Grab the health component
     }
 
     private void Update()
     {
-        //CoyoteTime
-        if (isGrounded)
+        //Landing detection
+        if (!wasGrounded && isGrounded)
         {
-            coyoteTimeCounter = coyoteTime;
-            airJumpCounter = 0;      
+            coyoteTimeCounter = coyoteTime; //reset coyote timer while grounded 
+            airJumpCounter = 0; //reset airJump counter, workaround to fix triple jump bug while using FixedUpdate method
         }
-        else 
+        
+        //Coyote Timer (airborne)
+        if (!isGrounded)
+        {
             coyoteTimeCounter -= Time.deltaTime;
+            if (coyoteTimeCounter < 0f)
+                coyoteTimeCounter = 0f;
+        }
+
+        wasGrounded = isGrounded;
 
         //Jump buffer
         if (Input.GetKeyDown(KeyCode.Space))
@@ -93,6 +113,13 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.flipX = moveInput < 0f; // makes the player face the way their walking
     }
 
+    private IEnumerator SpeedBoost(float duration)
+    {
+        moveSpeed = 8f;
+        yield return new WaitForSeconds(duration);
+        moveSpeed = 4f;
+    }
+
     private void Jump()
     {
         bool canCoyoteJump = coyoteTimeCounter > 0f;
@@ -119,6 +146,13 @@ public class PlayerController : MonoBehaviour
 
             jumpBufferCounter = 0f;
         }
+    }
+
+    private IEnumerator TripleJump(float duration)
+    {
+        airJumps = 2;
+        yield return new WaitForSeconds(duration);
+        airJumps = 1;
     }
 
     // Decide which animation to play based on movement and grounded state
@@ -157,6 +191,42 @@ public class PlayerController : MonoBehaviour
         {
             SoundManager.Instance.PlaySFX("BOING", 1f);
             rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, jumpForce * 2);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Trigger for healthUp
+        if(collision.CompareTag("healthUp"))
+        {   
+            bool healed = playerHealth.healPlayer();
+            if (healed)
+            {
+                SoundManager.Instance.PlaySFX("EAT", 1f);
+                Destroy(collision.gameObject);
+            }
+        }
+
+        //Trigger for jumpUp
+        if(collision.CompareTag("jumpUp"))
+        {
+            SoundManager.Instance.PlaySFX("EAT", 1f);
+            Destroy(collision.gameObject);
+
+            if (jumpBoostRoutine != null)
+                StopCoroutine(jumpBoostRoutine);
+            jumpBoostRoutine = StartCoroutine(TripleJump(jumpBoostDuration));
+        }
+
+        //Trigger for speedUp
+        if(collision.CompareTag("speedUp"))
+        {
+            SoundManager.Instance.PlaySFX("EAT", 1f);
+            Destroy(collision.gameObject);
+
+            if (speedBoostRoutine != null)
+                StopCoroutine(speedBoostRoutine);
+            speedBoostRoutine = StartCoroutine(SpeedBoost(speedBoostDuration));
         }
     }
 }

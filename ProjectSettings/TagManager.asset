@@ -8,6 +8,9 @@ TagManager:
   - CoinText
   - BouncePad
   - Coin
+  - healthUp
+  - jumpUp
+  - speedUp
   layers:
   - Default
   - TransparentFX
