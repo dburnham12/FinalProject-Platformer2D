@@ -1,9 +1,13 @@
 using System.Collections;
+using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public static int Level { get; private set; }
+
     // [SerializeField] forces fields to appear in the Inspector, so you can tweak them without editing code.
     [SerializeField] private float moveSpeed = 4f;              // How fast the player moves left/right
     [SerializeField] private float jumpForce = 8f;              // How strong the jump is (vertical speed)
@@ -35,7 +39,7 @@ public class PlayerController : MonoBehaviour
     private int coins = 0;
 
     //Jump additions
-    private float coyoteTime = 0.2f;
+    private readonly float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
     private float jumpBufferCounter;
     private Coroutine jumpBoostRoutine;
@@ -57,7 +61,9 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = 60;
-        
+
+        Level = int.Parse(Regex.Match(SceneManager.GetActiveScene().name, @"[0-9]+").Value);
+
         rigidbody = GetComponent<Rigidbody2D>();    // Grab the Rigidbody2D attached to the Player object once at the start.
         spriteRenderer = GetComponent<SpriteRenderer>(); // Grab the SpriteRenderer attached to the Player GameObject
         animator = GetComponent<Animator>();        // Grab the animator component on the player
@@ -192,7 +198,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "BouncePad")
+        if(collision.gameObject.CompareTag("BouncePad"))
         {
             SoundManager.Instance.PlaySFX("BOING", 1f);
             rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, jumpForce * 2);
