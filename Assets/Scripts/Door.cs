@@ -25,15 +25,12 @@ public class Door : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && keyCollected)
         {
-            if (keyCollected)
-            {
-                keyUI.RemoveKey(spriteRenderer.color);
-                GetComponent<BoxCollider2D>().enabled = false;
-                SoundManager.Instance.PlaySFX("DOOR", 0.5f);
-                GetComponent<Animator>().Play("Door");
-            }
+            keyUI.RemoveKey(spriteRenderer.color);
+            GetComponent<BoxCollider2D>().enabled = false;
+            SoundManager.Instance.PlaySFX("DOOR", 0.5f);
+            GetComponent<Animator>().Play("Door");
         }
     }
 }

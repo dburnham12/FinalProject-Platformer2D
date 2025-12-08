@@ -4201,7 +4201,7 @@ PrefabInstance:
     - target: {fileID: 7047023178253444174, guid: 695f62c7e48bd6d4594873db95ca2ccf, type: 3}
       propertyPath: door
       value: 
-      objectReference: {fileID: 4236583659015373479, guid: 3770c3a352394c749b676df5316f4cc8, type: 3}
+      objectReference: {fileID: 1543780054}
     - target: {fileID: 8196891569203450827, guid: 695f62c7e48bd6d4594873db95ca2ccf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.59
@@ -5520,6 +5520,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519892612}
   m_CullTransparentMesh: 1
+--- !u!1 &1543780054 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4236583659015373479, guid: 3770c3a352394c749b676df5316f4cc8, type: 3}
+  m_PrefabInstance: {fileID: 2009171853}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1547020396
 GameObject:
   m_ObjectHideFlags: 0
@@ -5644,7 +5649,7 @@ Transform:
   m_GameObject: {fileID: 1569274882}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.289524, y: 2.5, z: -10}
+  m_LocalPosition: {x: 3.999999, y: 2.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6330,6 +6335,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3556101807293938370, guid: ef0d7d22205cfb9498c273daa1929abd, type: 3}
+      propertyPath: container
+      value: 
+      objectReference: {fileID: 698612463}
     - target: {fileID: 3965433006762435164, guid: ef0d7d22205cfb9498c273daa1929abd, type: 3}
       propertyPath: m_Name
       value: Victory Flag
