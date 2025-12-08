@@ -22,6 +22,8 @@ public class MainMenu : MonoBehaviour
 
         level = PlayerPrefs.HasKey(LEVEL_KEY) ? PlayerPrefs.GetInt(LEVEL_KEY) : 1;
 
+        Debug.Log(level);
+
         levelButtons = levelButtonsContainer.GetComponentsInChildren<Button>();
 
         foreach (Button button in levelButtons)
@@ -30,10 +32,16 @@ public class MainMenu : MonoBehaviour
 
             if (int.Parse(buttonText) <= level)
             {
-                button.enabled = true;
+                button.interactable = true;
                 button.GetComponentInChildren<TMP_Text>().text = buttonText;
             }
         }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            PlayerPrefs.DeleteAll();
     }
 
     public void StartGame()

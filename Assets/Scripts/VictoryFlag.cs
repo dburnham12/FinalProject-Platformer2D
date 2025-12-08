@@ -14,11 +14,11 @@ public class VictoryFlag : MonoBehaviour
 
             if (PlayerPrefs.HasKey(LEVEL_KEY))
             {
-                if (Level > PlayerPrefs.GetInt(LEVEL_KEY))
-                    PlayerPrefs.SetInt("level", Level);
+                if (Level + 1 > PlayerPrefs.GetInt(LEVEL_KEY))
+                    PlayerPrefs.SetInt(LEVEL_KEY, Level + 1);
             }
             else
-                PlayerPrefs.SetInt(LEVEL_KEY, Level);
+                PlayerPrefs.SetInt(LEVEL_KEY, Level + 1);
 
             container.SetActive(true);
             Time.timeScale = 0.0f;
