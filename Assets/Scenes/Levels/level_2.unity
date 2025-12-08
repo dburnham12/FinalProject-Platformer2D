@@ -3997,7 +3997,7 @@ GameObject:
   - component: {fileID: 1009059576}
   - component: {fileID: 1009059575}
   m_Layer: 5
-  m_Name: Restart
+  m_Name: Continue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4069,7 +4069,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 828921731}
         m_TargetAssemblyTypeName: VictoryMenu, Assembly-CSharp
-        m_MethodName: RestartButton
+        m_MethodName: ContinueButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4304,7 +4304,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: Continue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 612fff73bd502b548b40939954f57271, type: 2}
   m_sharedMaterial: {fileID: 1403290352034308501, guid: 612fff73bd502b548b40939954f57271, type: 2}
