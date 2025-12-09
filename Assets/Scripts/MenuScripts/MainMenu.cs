@@ -22,8 +22,6 @@ public class MainMenu : MonoBehaviour
 
         level = PlayerPrefs.HasKey(LEVEL_KEY) ? PlayerPrefs.GetInt(LEVEL_KEY) : 1;
 
-        Debug.Log(level);
-
         levelButtons = levelButtonsContainer.GetComponentsInChildren<Button>();
 
         foreach (Button button in levelButtons)
@@ -46,7 +44,10 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene($"level_{level}");
+        if(level <= FINAL_LEVEL)
+            SceneManager.LoadScene($"level_{level}");
+        else
+            SceneManager.LoadScene($"level_{FINAL_LEVEL}");
     }
 
     public void LevelSelect(int level)
