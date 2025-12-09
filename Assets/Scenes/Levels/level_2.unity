@@ -702,7 +702,7 @@ GameObject:
   m_Component:
   - component: {fileID: 136934914}
   m_Layer: 0
-  m_Name: Coin Line (11)
+  m_Name: Coin Line (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1385,7 +1385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 291408715}
   m_Layer: 0
-  m_Name: Coin Line
+  m_Name: Coin Line (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1400,13 +1400,13 @@ Transform:
   m_GameObject: {fileID: 291408714}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 66, y: 13.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1773230964}
   - {fileID: 656025711}
-  m_Father: {fileID: 1500701443}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &295209616
 PrefabInstance:
@@ -1465,11 +1465,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d149b36ab22d824ab2e553794312bfa, type: 3}
---- !u!4 &307104462 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9185533370524891145, guid: fc61ac155d012f04d9e2f2abfdfbc029, type: 3}
-  m_PrefabInstance: {fileID: 1795051276}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &309563253 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4105084232856090893, guid: 003b795736f89b7489d556c8cd1add0d, type: 3}
@@ -1730,7 +1725,7 @@ GameObject:
   m_Component:
   - component: {fileID: 352085377}
   m_Layer: 0
-  m_Name: Coin Line (10)
+  m_Name: Coin Line (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8955,7 +8950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 970586181}
   m_Layer: 0
-  m_Name: Coin Line (9)
+  m_Name: Coin Line (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9536,10 +9531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 9185533370524891145, guid: fc61ac155d012f04d9e2f2abfdfbc029, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2134058763}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc61ac155d012f04d9e2f2abfdfbc029, type: 3}
 --- !u!4 &1164006226 stripped
@@ -11831,7 +11823,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1458073157}
   m_Layer: 0
-  m_Name: Coin Line
+  m_Name: Coin Line (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11846,13 +11838,13 @@ Transform:
   m_GameObject: {fileID: 1458073156}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 61, y: 13.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 451572327}
   - {fileID: 2014336914}
-  m_Father: {fileID: 307104462}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1458837694
 PrefabInstance:
@@ -12048,11 +12040,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6493833866183423451, guid: 438eacb922945584282ccf836c4ddad3, type: 3}
   m_PrefabInstance: {fileID: 792064653}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1500701443 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9185533370524891145, guid: fc61ac155d012f04d9e2f2abfdfbc029, type: 3}
-  m_PrefabInstance: {fileID: 1666032934}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1506828744 stripped
 Transform:
@@ -12511,7 +12498,7 @@ Transform:
   m_GameObject: {fileID: 1569274882}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.006056, y: 2.5, z: -10}
+  m_LocalPosition: {x: 4, y: 2.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13066,10 +13053,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 9185533370524891145, guid: fc61ac155d012f04d9e2f2abfdfbc029, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 291408715}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc61ac155d012f04d9e2f2abfdfbc029, type: 3}
 --- !u!1 &1669308848
@@ -13395,10 +13379,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 9185533370524891145, guid: fc61ac155d012f04d9e2f2abfdfbc029, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1458073157}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc61ac155d012f04d9e2f2abfdfbc029, type: 3}
 --- !u!1 &1807483979
@@ -13655,11 +13636,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc61ac155d012f04d9e2f2abfdfbc029, type: 3}
---- !u!4 &1826561794 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9185533370524891145, guid: fc61ac155d012f04d9e2f2abfdfbc029, type: 3}
-  m_PrefabInstance: {fileID: 1143672239}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1875833761
 GameObject:
   m_ObjectHideFlags: 0
@@ -15251,7 +15227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2134058763}
   m_Layer: 0
-  m_Name: Coin Line
+  m_Name: Coin Line (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15266,22 +15242,22 @@ Transform:
   m_GameObject: {fileID: 2134058762}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 71, y: 13.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1493860066}
   - {fileID: 1295423867}
-  m_Father: {fileID: 1826561794}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1569274885}
-  - {fileID: 225644630}
   - {fileID: 2055769729}
   - {fileID: 1669308850}
+  - {fileID: 225644630}
   - {fileID: 1517620237}
   - {fileID: 755578879}
   - {fileID: 295209616}
@@ -15332,3 +15308,6 @@ SceneRoots:
   - {fileID: 352085377}
   - {fileID: 136934914}
   - {fileID: 21927468}
+  - {fileID: 1458073157}
+  - {fileID: 291408715}
+  - {fileID: 2134058763}
