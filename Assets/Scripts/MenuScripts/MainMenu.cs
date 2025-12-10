@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 public class MainMenu : MonoBehaviour
 {
     public const string LEVEL_KEY = "level";
-    public const int FINAL_LEVEL = 2;
+    public const int FINAL_LEVEL = 4;
 
     [SerializeField] private GameObject playButton;
     [SerializeField] private GameObject levelButtonsContainer;
@@ -28,11 +28,8 @@ public class MainMenu : MonoBehaviour
         {
             string buttonText = Regex.Match(button.name, @"[0-9]+").Value;
 
-            if (int.Parse(buttonText) <= level)
-            {
+            if (buttonText != string.Empty && int.Parse(buttonText) <= level)
                 button.interactable = true;
-                button.GetComponentInChildren<TMP_Text>().text = buttonText;
-            }
         }
     }
 
@@ -53,6 +50,19 @@ public class MainMenu : MonoBehaviour
     public void LevelSelect(int level)
     {
         SceneManager.LoadScene($"level_{level}");
+    }
+
+    public void ResetLevels()
+    {
+        level = 1;
+        PlayerPrefs.SetInt(LEVEL_KEY, level);
+        foreach (Button button in levelButtons)
+        {
+            string buttonText = Regex.Match(button.name, @"[0-9]+").Value;
+
+            if (buttonText != string.Empty && int.Parse(buttonText) > level)
+                button.interactable = false;
+        }
     }
 
     public void MenuSwap()
