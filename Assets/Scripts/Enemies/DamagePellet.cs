@@ -28,7 +28,7 @@ public class DamagePellet : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
             collision.gameObject.GetComponent<PlayerHealth>().TakeDamage();
-        if(collision.gameObject.tag != "Damage" && collision.gameObject.tag != "Coin" && collision.gameObject.layer != 2)
+        if(collision.gameObject.tag != "Enemy" && collision.gameObject.tag != "Coin" && collision.gameObject.layer != 2)
             Destroy(gameObject);
     }
 }

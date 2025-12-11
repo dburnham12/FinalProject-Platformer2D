@@ -15,11 +15,20 @@ public class DestroyEnemy : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            SoundManager.Instance.PlaySFX("ENEMYDEATH", 0.5f);
-            collision.gameObject.GetComponent<Rigidbody2D>().linearVelocityY = 0;
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(upwardsForce * Vector2.up, ForceMode2D.Impulse); // add a force in an upwards direction
-            Instantiate(destroyedObject, transform.position, Quaternion.identity);
-            Destroy(transform.parent.gameObject);
+            float playerBottom = collision.GetComponent<BoxCollider2D>().bounds.min.y;
+            float enemyTop = transform.parent.GetComponent<BoxCollider2D>().bounds.max.y;
+            Debug.Log(playerBottom);
+            Debug.Log(enemyTop);
+            Debug.Log(enemyTop < playerBottom);
+            if (playerBottom > enemyTop - 0.05f)
+            {
+
+                SoundManager.Instance.PlaySFX("ENEMYDEATH", 0.5f);
+                collision.gameObject.GetComponent<Rigidbody2D>().linearVelocityY = 0;
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(upwardsForce * Vector2.up, ForceMode2D.Impulse); // add a force in an upwards direction
+                Instantiate(destroyedObject, transform.position, Quaternion.identity);
+                Destroy(transform.parent.gameObject);
+            }
         }
     }
 }
