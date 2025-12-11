@@ -196,6 +196,9 @@ MonoBehaviour:
     m_Bits: 64
   jumpIndicator: {fileID: 0}
   speedIndicator: {fileID: 0}
+  knockbackDuration: 0.25
+  knockbackForce: 5
+  destroyObject: {fileID: 5228730384685677132, guid: 93e4c6ccbbfed9048a22c82787df75e2, type: 3}
 --- !u!95 &1886274991133445582
 Animator:
   serializedVersion: 7

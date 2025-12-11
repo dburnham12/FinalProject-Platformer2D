@@ -23,6 +23,14 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Image jumpIndicator;
     [SerializeField] private Image speedIndicator;
+    
+    [SerializeField] private float knockbackDuration = 0.25f;
+    [SerializeField] private float knockbackForce = 5f;
+
+    [SerializeField] private GameObject destroyObject;
+
+    private bool canMove = true;
+    private Coroutine knockbackRoutine;
    
     // Private fields are used internally by the script.
     // Components
@@ -113,8 +121,11 @@ public class PlayerController : MonoBehaviour
         // Get input from keyboard (A/D or Left/Right arrows).
         moveInput = Input.GetAxis("Horizontal");
 
-        HorizontalMovement();
-        Jump();
+        if(canMove)
+        {
+            HorizontalMovement();
+            Jump();
+        }
         SetAnimation();    // Call animation logic based on movement and jump state
         
         wasGrounded = isGrounded;   //set last frame to grounded
@@ -203,13 +214,49 @@ public class PlayerController : MonoBehaviour
             SoundManager.Instance.PlaySFX("BOING", 1f);
             rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, jumpForce * 2);
         }
+
+        // If the colliding object is tagged "Player"
+        if (collision.gameObject.CompareTag("Damage"))
+        {
+            ApplyDamage(collision);
+        }
+
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            Vector3 surfaceNormal = collision.contacts[0].normal;
+
+            if(Vector3.Dot(surfaceNormal, Vector3.up) > 0.5f)
+            {
+                SoundManager.Instance.PlaySFX("ENEMYDEATH", 0.5f);
+                rigidbody.linearVelocityY = 0;
+                rigidbody.AddForce(10f * Vector2.up, ForceMode2D.Impulse); // add a force in an upwards direction
+                Instantiate(destroyObject, collision.transform.position, Quaternion.identity);
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+                ApplyDamage(collision);
+            }
+        }
+    }
+
+    private void ApplyDamage(Collision2D collision)
+    {
+        Vector2 direction = (transform.position - collision.transform.position).normalized; // direction that the knockback will be applied
+
+        // Access the PlayerHealth script and apply damage
+        gameObject.GetComponent<PlayerHealth>().TakeDamage();
+
+        if (knockbackRoutine != null)
+            StopCoroutine(knockbackRoutine);
+        knockbackRoutine = StartCoroutine(KnockbackCoroutine(direction, rigidbody));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Trigger for healthUp
-        if(collision.CompareTag("healthUp"))
-        {   
+        if (collision.CompareTag("healthUp"))
+        {
             bool healed = playerHealth.healPlayer();
             if (healed)
             {
@@ -219,7 +266,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Trigger for jumpUp
-        if(collision.CompareTag("jumpUp"))
+        if (collision.CompareTag("jumpUp"))
         {
             SoundManager.Instance.PlaySFX("EAT", 1f);
             Destroy(collision.gameObject);
@@ -230,7 +277,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Trigger for speedUp
-        if(collision.CompareTag("speedUp"))
+        if (collision.CompareTag("speedUp"))
         {
             SoundManager.Instance.PlaySFX("EAT", 1f);
             Destroy(collision.gameObject);
@@ -239,5 +286,14 @@ public class PlayerController : MonoBehaviour
                 StopCoroutine(speedBoostRoutine);
             speedBoostRoutine = StartCoroutine(SpeedBoost(speedBoostDuration));
         }
+    }
+
+    private IEnumerator KnockbackCoroutine(Vector3 direction, Rigidbody2D playerRb)
+    {
+        Vector3 force = direction * knockbackForce; // Set up force for knockback
+        playerRb.AddForce(force, ForceMode2D.Impulse); // add a force in a specified direction 
+        canMove = false; // temporarily disable the player controller to prevent movement and allow knockback
+        yield return new WaitForSeconds(knockbackDuration); // wait for the amount of time needed to apply knockback
+        canMove = true; // re-enable player controller to allow for player to resume control
     }
 }
