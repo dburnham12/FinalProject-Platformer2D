@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7480826920600813213}
   - component: {fileID: 6069805342606546787}
   - component: {fileID: 3136846234974613821}
-  - component: {fileID: 6348607640445543084}
   m_Layer: 0
   m_Name: Damage
   m_TagString: Damage
@@ -130,7 +129,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.0625, y: 0.5625}
+    oldSize: {x: 1, y: 0.5625}
     newSize: {x: 1.0625, y: 0.5625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -145,17 +144,3 @@ PolygonCollider2D:
       - {x: 0.37580746, y: -0.2139858}
       - {x: 0.027131721, y: 0.14357229}
   m_UseDelaunayMesh: 0
---- !u!114 &6348607640445543084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6534254283710774219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe3ce460bbcf3654b90938a8fc7bfdd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TakingDamage
-  knockbackDuration: 0.25
-  knockbackForce: 5
