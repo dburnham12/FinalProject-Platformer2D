@@ -11,6 +11,7 @@ TagManager:
   - healthUp
   - jumpUp
   - speedUp
+  - Enemy
   layers:
   - Default
   - TransparentFX
