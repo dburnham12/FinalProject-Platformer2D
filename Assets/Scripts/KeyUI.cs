@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,8 +19,9 @@ public class KeyUI : MonoBehaviour
 
     public void AddKey(Color color)
     {
-        Image keyObject = Instantiate(keyImage, new Vector3(transform.position.x, transform.position.y + uiPosition, transform.position.z), Quaternion.identity);
-        keyObject.transform.SetParent(transform);
+        Image keyObject = Instantiate(keyImage, transform);
+        //keyObject.GetComponent<RectTransform>().transform.SetParent(transform.GetComponent<RectTransform>());
+        keyObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0f, uiPosition);
         keyObject.color = color;
         uiPosition -= keyHeight;
         imageList.Add(keyObject);
@@ -34,7 +36,7 @@ public class KeyUI : MonoBehaviour
         float newUIPosition = 0;
         for (int i = 0; i < imageList.Count; i++)
         {
-            imageList[i].transform.position = new Vector3(transform.position.x, transform.position.y + newUIPosition, transform.position.z);
+            imageList[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0f, newUIPosition);
             newUIPosition -= keyHeight;
         }
     }
