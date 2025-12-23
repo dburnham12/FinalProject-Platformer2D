@@ -1,76 +1,63 @@
-# MoviesPLEX
+# Jump Man
 
-A responsive movie discovery website built with EJS and MongoDB that allows users to browse, search, and explore films with detailed information such as ratings, genres, and release dates. It uses server-side rendering and a clean, intuitive interface to deliver dynamic, data-driven content.
+Jumpman is a fast-paced platformer game where the player controls a character navigating obstacles, platforms, and hazards to reach the end of each level. The game focuses on precise movement, timing-based jumps, and increasing difficulty to challenge player skill and reflexes.
 
-### MoviesPLEX - Landing Page
+### Jump Man - Main Menu
 
-Displays a logo along with an enter button.
+The main menu for the game, allows the user to press play or go to the level select screen.
 
-!["Screenshot of Landing Page!"](https://github.com/dburnham12/MoviesPlex/blob/main/Screenshots/LandingPage.png)
+!["Screenshot of Main Menu"](https://github.com/dburnham12/FinalProject-Platformer2D/blob/main/Screenshots/MainMenu.png)
 
-#### Mobile View
+### Jump Man - Level Select Menu
 
-!["Screenshot of Mobile Landing Page!"](https://github.com/dburnham12/MoviesPlex/blob/main/Screenshots/LandingPageMobile.png)
+The level select menu for the game. Allows players to select a level once the previous level has been completed.
 
-### MoviesPLEX - Movies Page
+!["Screenshot of Level Select Menu"](https://github.com/dburnham12/FinalProject-Platformer2D/blob/main/Screenshots/LevelSelect.png)
 
-Displays all movies currently stored in the database. Users can filter movies by age rating. Users can also view, edit, and delete movies from this page. They can also navigate
+### Jump Man - Game Play
 
-!["Screenshot of Movies Page!"](https://github.com/dburnham12/MoviesPlex/blob/main/Screenshots/MoviesPage.png)
+A small snipped of what the game looks like when it is actually running. The game currently has 4 different unique levels that use the various developed mechanics in their own unique ways.
 
-#### Mobile View
+!["Screenshot of Level One"](https://github.com/dburnham12/FinalProject-Platformer2D/blob/main/Screenshots/JumpManLevel.png)
 
-!["Screenshot of Moblie Movies Page!"](https://github.com/dburnham12/MoviesPlex/blob/main/Screenshots/MoviesPageMobile.png)
+### Jump Man - Enemies
 
-### MoviesPLEX - Add Movie Page
+There are 3 unique enemies in the Jump Man game. 
+-   Blue - Patrol left to right and guard ledges.
+-   Red - Move up and down and represent flying enemies.
+-   Green - Shoot small pellets at the player when within range that cause damage.
 
-Users can enter in the information for the movie they would like to add to this page. After pressing the submit button at the bottom the movie will be added.
+!["Screenshot of Enemies"](https://github.com/dburnham12/FinalProject-Platformer2D/blob/main/Screenshots/Enemies.png)
 
-!["Screenshot of Add Movie Page!"](https://github.com/dburnham12/MoviesPlex/blob/main/Screenshots/AddMoviePage.png)
+### Jump Man - Power Ups
 
-#### Mobile View
+There are 3 unique power ups in the Jump Man game. 
+-   Strawberry - Grants player health when they are not at 100%.
+-   Banana - Allows the player to have an extra jump for 5 seconds.
+-   Orange - Grants the player super speed for 5 seconds.
 
-!["Screenshot of Add Movie Page!"](https://github.com/dburnham12/MoviesPlex/blob/main/Screenshots/AddMovePageMobile.png)
+!["Screenshot of Power Ups"](https://github.com/dburnham12/FinalProject-Platformer2D/blob/main/Screenshots/PowerUps.png)
 
-### MoviesPLEX - Edit Movie Page
+### Jump Man - Keys & Doors
 
-Users can update information if any changes are necessary to this page. The form will be autofilled with information for the selected movie and will be updated when the submit button at the bottom is pressed.
+The game also contains a key and door mechanic which blocks off sections of a level. Players need to find the key in order to advance through the door. 
 
-!["Screenshot of Edit Movie Page!"](https://github.com/dburnham12/MoviesPlex/blob/main/Screenshots/EditMoviePage.png)
+!["Screenshot of Keys & Doors"](https://github.com/dburnham12/FinalProject-Platformer2D/blob/main/Screenshots/KeyDoor.png)
 
-#### Mobile View
+### Jump Man - Coins
 
-!["Screenshot of Edit Movie Page!"](https://github.com/dburnham12/MoviesPlex/blob/main/Screenshots/EditMoviePageMobile.png)
+There are 3 different coin types to collect. 
+-   Bronze = 1 point
+-   Silver = 3 points
+-   Gold = 5 points
 
-### MoviesPLEX - Movie Page
+!["Screenshot of Keys & Doors"](https://github.com/dburnham12/FinalProject-Platformer2D/blob/main/Screenshots/KeyDoor.png)
 
-Displays all information for the selected movie.
+### Jump Man - Misc
 
-!["Screenshot of Movie Page!"](https://github.com/dburnham12/MoviesPlex/blob/main/Screenshots/MoviePage.png)
+There is also a jump pad and a damage spike allowing for additional game mechanics to be present in the levels.
 
-#### Mobile View
-
-!["Screenshot of Movie Page!"](https://github.com/dburnham12/MoviesPlex/blob/main/Screenshots/MoviePageMobile.png)
-
-### MoviesPLEX - Book Ticket Page
-
-Users can book tickets for movies from this page. They will be able to input their preferred information and confirm their ticket by clicking on the link at the bottom of the page.
-
-!["Screenshot of Book Ticket Page!"](https://github.com/dburnham12/MoviesPlex/blob/main/Screenshots/BookTicketPage.png)
-
-#### Mobile View
-
-!["Screenshot of Book Ticket Page!"](https://github.com/dburnham12/MoviesPlex/blob/main/Screenshots/BookTicketPageMobile.png)
-
-### MoviesPLEX - Tickets Page
-
-Users will be able to see all tickets currently booked for movies on this page.
-
-!["Screenshot of Tickets Page!"](https://github.com/dburnham12/MoviesPlex/blob/main/Screenshots/TicketsPage.png)
-
-#### Mobile View
-
-!["Screenshot of Tickets Page!"](https://github.com/dburnham12/MoviesPlex/blob/main/Screenshots/TicketsPageMobile.png)
+!["Screenshot of Misc Items"](https://github.com/dburnham12/FinalProject-Platformer2D/blob/main/Screenshots/Misc.png)
 
 ## Getting Started
 
