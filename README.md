@@ -51,7 +51,7 @@ There are 3 different coin types to collect.
 -   Silver = 3 points
 -   Gold = 5 points
 
-!["Screenshot of Keys & Doors"](https://github.com/dburnham12/FinalProject-Platformer2D/blob/main/Screenshots/KeyDoor.png)
+!["Screenshot of Keys & Doors"](https://github.com/dburnham12/FinalProject-Platformer2D/blob/main/Screenshots/Coins.png)
 
 ### Jump Man - Misc
 
