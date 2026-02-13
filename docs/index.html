@@ -7,9 +7,9 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
-  <body>
+  <body style="background-color: #1a1913; color: #f0f0f0">
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
+      <canvas id="unity-canvas" width=450 height=281 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -19,7 +19,6 @@
       <div id="unity-warning"> </div>
       <div id="unity-footer">
         <div id="unity-logo-title-footer"></div>
-        <div id="unity-fullscreen-button"></div>
         <div id="unity-build-title">FinalProject-Platformer2D</div>
       </div>
     </div>
@@ -104,8 +103,8 @@
 
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-        canvas.style.width = "960px";
-        canvas.style.height = "600px";
+        canvas.style.width = "450px";
+        canvas.style.height = "281px";
       }
 
       document.querySelector("#unity-loading-bar").style.display = "block";
@@ -117,9 +116,6 @@
           document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
               }).then((unityInstance) => {
                 document.querySelector("#unity-loading-bar").style.display = "none";
-                document.querySelector("#unity-fullscreen-button").onclick = () => {
-                  unityInstance.SetFullscreen(1);
-                };
 
               }).catch((message) => {
                 alert(message);
